@@ -1,0 +1,85 @@
+import java.util.*;
+import java.lang.*;
+
+class Arvore{
+
+	Tabuleiro pai;
+	int depthfinal=100000;
+	Arvore(Tabuleiro inicio){
+		pai=inicio;
+	}
+}
+
+class Tabuleiro{
+
+	int [][] tabuleiro= new int [3][3];
+	int vaziox,vazioy;
+	Tabuleiro pai=null;
+	int depth;
+	boolean final;
+	/*child
+		1-move-se esquerda
+		2-move-se baixo
+		3-move-se direita
+		4-move-se cima
+		*/
+	Tabuleiro(Tabuleiro tab,int tabant[3][3],int child,int depth){
+		this.depth=depth;
+		int paix=tab.getvazioX();
+		int paiy=tab.getvazioY();
+		int temp;
+		vaziox=paix;
+		vazioy=paiy;
+		switch (child){
+				case 1: tab[paix][paiy] =tab[paix-1][paiy];
+						tab[paix-1][paiy]=0;
+						vaziox--;
+						break;
+				case 2: tab[paix][paiy] =tab[paix][paiy+1];
+						tab[paix][paiy+1]=0;
+						vazioy++;
+						break;
+				case 3: tab[paix][paiy] =tab[paix+1][paiy];
+						tab[paix+1][paiy]=0;
+						vaziox++;
+						break;
+				case 4: tab[paix][paiy] =tab[paix][paiy-1];
+						tab[paix][paiy-1]=0;
+						vazioy--;
+						break;
+				default:System.out.printl("ERRO NA DIREÇÃO A SEGUIR");
+						break;
+					}
+
+		tabuleiro=tab;
+		System.out.println("movido para "+child);
+
+
+
+
+
+
+}
+
+
+
+	public int getvazioX(){
+		return vaziox;
+	}
+	
+	public int getvazioY(){
+		return vazioy;
+	}
+
+	public Boolean isFinal(){
+		int test=1;
+		for (int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				if (tabuleiro[i][j]!=test){return false;}
+			}
+		}
+		return true;
+	}
+}
+
+}
